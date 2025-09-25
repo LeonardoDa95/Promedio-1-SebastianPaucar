@@ -8,7 +8,10 @@ namespace Promedio1_SP
 {
     internal class Menu
     {
-        private List<Units> units;
+        private List<Units> allieunits;
+        private List<Units> enemyunits;
+        private Player player = new Player();
+        private Enemy enemy = new Enemy();
         private void ShowGameMenu()
         {
             bool continueFlag = true;
@@ -23,10 +26,16 @@ namespace Promedio1_SP
                 switch (option)
                 {
                     case "1":
-                        CreateUnit();
-                        break;
+                        if (player.resources >= 10)
+                        {
+                            CreateUnit();
+                        }
+                            break;
                     case "2":
-                        UpgradeResources();
+                        if (player.resources >= 20)
+                        {
+                            UpgradeResources();
+                        }
                         break;
                     case "0":
                         continueFlag = false;
@@ -39,12 +48,43 @@ namespace Promedio1_SP
         }
         private void CreateUnit()
         {
-
+            allieunits.Add(new Units());
         }
         private void UpgradeResources()
         {
-
+            player.ResourcesUpgradeeeeee();
         }
+        private void PassRound()
+        {
+            if (allieunits.Count > enemyunits.Count)
+            {
+                Console.WriteLine("Ganaste esta ronda y atacaste el campamento rival");
+                enemy.ehp--;
+            }
+            else if (allieunits.Count < enemyunits.Count)
+            {
+                Console.WriteLine("Perdiste esta ronda y atacaron tu campamento");
+                player.ahp--;
+            }
+            else if (allieunits.Count == enemyunits.Count)
+            {
+                Console.WriteLine("Empate ambos tienen las mismas fuerzas");
+            }
+                player.PassRounddddddd();
+            if (player.ahp <= 0)
+            {
+                Console.WriteLine("Te has quedado sin vidas...PERDISTE");
+            }
+            if (enemy.ehp <= 0)
+            {
+                Console.WriteLine("El enemigo se quedo sin vidas...¡GANASTE!");
+            }
+        }
+        private void EnemySpawn()
+        {
+            enemy.EnemySpawnnnnnnn();
+        }
+
     }
 
 }

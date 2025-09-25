@@ -11,6 +11,7 @@ namespace Promedio1_SP
     {
         private int damage = 10;
         private int life = 15;
+
     }
 
 }
