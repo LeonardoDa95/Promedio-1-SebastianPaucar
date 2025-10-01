@@ -12,11 +12,15 @@ namespace Promedio1_SP
         private List<Units> enemyunits;
         private Player player = new Player();
         private Enemy enemy = new Enemy();
-        private void ShowGameMenu()
+        public void ShowGameMenu()
         {
             bool continueFlag = true;
             while (continueFlag)
             {
+                Console.WriteLine("El round actual es: " + player.round);
+                Console.WriteLine("La vida de tu base es: " + player.ahp);
+                Console.WriteLine("Tus recursos son: " + player.resources);
+                Console.WriteLine("Tu nivel de recoleccion es: " + player.resourcesLV);
                 Console.WriteLine("Es tu turno elige tu accion");
                 Console.WriteLine("1. Crear una unidad");
                 Console.WriteLine("2. Mejorar la recoleccion de recursos");
@@ -29,12 +33,14 @@ namespace Promedio1_SP
                         if (player.resources >= 10)
                         {
                             CreateUnit();
+                            PassRound();
                         }
                             break;
                     case "2":
                         if (player.resources >= 20)
                         {
                             UpgradeResources();
+                            PassRound();
                         }
                         break;
                     case "0":
@@ -56,15 +62,19 @@ namespace Promedio1_SP
         }
         private void PassRound()
         {
+            EnemySpawn();
+
             if (allieunits.Count > enemyunits.Count)
             {
                 Console.WriteLine("Ganaste esta ronda y atacaste el campamento rival");
                 enemy.ehp--;
+                ShowGameMenu();
             }
             else if (allieunits.Count < enemyunits.Count)
             {
                 Console.WriteLine("Perdiste esta ronda y atacaron tu campamento");
                 player.ahp--;
+                ShowGameMenu();
             }
             else if (allieunits.Count == enemyunits.Count)
             {
@@ -82,7 +92,10 @@ namespace Promedio1_SP
         }
         private void EnemySpawn()
         {
-            enemy.EnemySpawnnnnnnn();
+            if (player.round % 2 == 0)
+            {
+                enemyunits.Add(new Units());
+            }
         }
 
     }

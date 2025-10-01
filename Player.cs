@@ -11,8 +11,8 @@ namespace Promedio1_SP
     {
         public int ahp = 5;
         public int round = 1;
-        public int resources = 10;
-        int resourcesLV = 1;
+        public int resources = 100;
+        public int resourcesLV = 1;
 
         public void ResourcesUpgradeeeeee()
         {
